@@ -1,49 +1,67 @@
-import java.util.*;  
-import java.util.Scanner;
+package latest;
 
-public class wagerBets {
-	private int coins = 500;
-	private int coin_bet = 0;
-	
-	public wagerBets() {
-		coins = getCoins();
-		coin_bet = getCBet();
-	}
-	
-	public void make_bet(int c, int b){
-		int result;
-		while (b == 0){
-			Scanner sc = new Scanner(System.in);
-			System.out.println("You currently have " + c + " coins.");
-			System.out.print("Please make a wager for this round: ");
-			int wager = Integer.parseInt(sc.nextLine());
-			if (wager > c || wager < 0){
-				System.out.println("Incorrect wager amount. Please try again.");
-				System.out.println("");
-			}
-			else if (wager == 0){
-				System.out.println("No wager was made. Please try again.");
-				System.out.println("");
-			}
-			else{
-					setCBet(wager);
-					result = c - wager;
-					setCoins(result);
-					System.out.println("You have decided to bet: " + b + " coins.");
-					System.out.println("You currently have " + c + " coins.");
-					System.out.println("");
-					break;
-			}
-		}
-	}
-	
-	public int getCoins() { return coins; }
-	public void setCoins(int c) { coins = c; }
-	public int getCBet() { return coin_bet; }
-	public void setCBet(int cb) { coin_bet = cb; }
-}
-public class gamestart {
+import java.util.*; 
+
+class gamestart {	
 	public static void main(String args[]) throws java.io.IOException {
+		
+		//Initialize a 52 Card Deck
+		cards card_deck[] = new cards[52];
+		card_deck[0] = new cards("Ace", "Spade", 14);
+		card_deck[1] = new cards("Ace", "Heart", 14);
+		card_deck[2] = new cards("Ace", "Clover", 14);
+		card_deck[3] = new cards("Ace", "Diamond", 14);
+		card_deck[4] = new cards("2", "Spade", 2);
+		card_deck[5] = new cards("2", "Heart", 2);
+		card_deck[6] = new cards("2", "Clover", 2);
+		card_deck[7] = new cards("2", "Diamond", 2);
+		card_deck[8] = new cards("3", "Spade", 3);
+		card_deck[9] = new cards("3", "Heart", 3);
+		card_deck[10] = new cards("3", "Clover", 3);
+		card_deck[11] = new cards("3", "Diamond", 3);
+		card_deck[11] = new cards("4", "Spade", 4);
+		card_deck[13] = new cards("4", "Heart", 4);
+		card_deck[14] = new cards("4", "Clover", 4);
+		card_deck[15] = new cards("4", "Diamond", 4);
+		card_deck[16] = new cards("5", "Spade", 5);
+		card_deck[17] = new cards("5", "Heart", 5);
+		card_deck[18] = new cards("5", "Clover", 5);
+		card_deck[19] = new cards("5", "Diamond", 5);
+		card_deck[20] = new cards("6", "Spade", 6);
+		card_deck[21] = new cards("6", "Heart", 6);
+		card_deck[22] = new cards("6", "Clover", 6);
+		card_deck[23] = new cards("6", "Diamond", 6);
+		card_deck[24] = new cards("7", "Spade", 7);
+		card_deck[25] = new cards("7", "Heart", 7);
+		card_deck[26] = new cards("7", "Clover", 7);
+		card_deck[27] = new cards("7", "Diamond", 7);
+		card_deck[28] = new cards("8", "Spade", 8);
+		card_deck[29] = new cards("8", "Heart", 8);
+		card_deck[30] = new cards("8", "Clover", 8);
+		card_deck[31] = new cards("8", "Diamond", 8);
+		card_deck[32] = new cards("9", "Spade", 9);
+		card_deck[33] = new cards("9", "Heart", 9);
+		card_deck[34] = new cards("9", "Clover", 9);
+		card_deck[35] = new cards("9", "Diamond", 9);
+		card_deck[36] = new cards("10", "Spade", 10);
+		card_deck[37] = new cards("10", "Heart", 10);
+		card_deck[38] = new cards("10", "Clover", 10);
+		card_deck[39] = new cards("10", "Diamond", 10);
+		card_deck[40] = new cards("Jack", "Spade", 11);
+		card_deck[41] = new cards("Jack", "Heart", 11);
+		card_deck[42] = new cards("Jack", "Clover", 11);
+		card_deck[43] = new cards("Jack", "Diamond", 11);
+		card_deck[44] = new cards("Queen", "Spade", 12);
+		card_deck[45] = new cards("Queen", "Heart", 12);
+		card_deck[46] = new cards("Queen", "Clover", 12);
+		card_deck[47] = new cards("Queen", "Diamond", 12);
+		card_deck[48] = new cards("King", "Spade", 13);
+		card_deck[49] = new cards("King", "Heart", 13);
+		card_deck[50] = new cards("King", "Clover", 13);
+		card_deck[51] = new cards("King", "Diamond", 13);
+		
+		int continueGame = 1;
+		rounds rd = new rounds();
 		wagerBets wb = new wagerBets();
 		System.out.println("Welcome to Casino Card Game War!");
 		System.out.println("A. Start the game! ");
@@ -52,25 +70,16 @@ public class gamestart {
 		System.out.print("Please enter your number of choice: ");
 		char select = (char) System.in.read();
 		
-		
 		switch(select) {
 			case 'a':
-				wb.make_bet(wb.getCoins(), wb.getCBet());
-				break;
 			case 'A':
+			while(continueGame == 1){
 				wb.make_bet(wb.getCoins(), wb.getCBet());
+				rd.startround(wb.getCoins(), wb.getCBet(), card_deck);
+				wb.handCompare(rd.getphValue(), rd.getdhValue());
+			}
 				break;
 			case 'b': 
-				System.out.println("Here's how to play!");
-				System.out.println("");
-				System.out.println("The cards are ranked in the same way that cards in poker games are ranked, with aces being the highest cards.");
-				System.out.println("One card each is dealt to a dealer and to a player. If the player's card is higher, he or she wins the wager they bet. However, if the dealer's card is higher, the player loses their bet.");
-				System.out.println("A tie occurs when the dealer and the player each have cards of the same rank. In a tie situation, the player has two options: ");
-				System.out.println("- The player can surrender, in which case the player loses half the bet.");
-				System.out.println("- The player can go to war, in which case the player must double his stake.");
-				System.out.println("");
-				System.out.println("If the player's card is ranked higher than the dealer's, then the player wins the amount of his original wager only. ");
-				break;
 			case 'B': 
 				System.out.println("Here's how to play!");
 				System.out.println("");
@@ -83,8 +92,6 @@ public class gamestart {
 				System.out.println("If the player's card is ranked higher than the dealer's, then the player wins the amount of his original wager only. ");
 				break;
 			case 'C':
-				System.out.println("Closing the game...");
-				System.exit(0);
 			case 'c':
 				System.out.println("Closing the game...");
 				System.exit(0);
