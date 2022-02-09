@@ -5,6 +5,7 @@ A Java program simulating a Casino War card game
 * [Project Aim](#Project-Aim)
 * [Technologies](#Techonologies)
 * [Installation](#Installation)
+* [To-Do list](#To-Do-list)
 
 
 ## Project Aim
@@ -28,5 +29,9 @@ cd..
 javac latest/wagerBets.java latest/gamestart.java latest/cards.java latest/rounds.java
 java latest.gamestart
 ```
+### To-Do list
+*	Swing UI Integration
+*	Card Draw tracking
+*	File Output for result
 
 
