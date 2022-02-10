@@ -5,7 +5,7 @@ import java.util.*;
 class gamestart {	
 	public static void main(String args[]) throws java.io.IOException {
 		
-		//Initialize a 52 Card Deck
+		//Initialize a 52 Card Deck holding card name, card symbol, and card value
 		cards card_deck[] = new cards[52];
 		card_deck[0] = new cards("Ace", "Spade", 14);
 		card_deck[1] = new cards("Ace", "Heart", 14);
@@ -19,7 +19,7 @@ class gamestart {
 		card_deck[9] = new cards("3", "Heart", 3);
 		card_deck[10] = new cards("3", "Clover", 3);
 		card_deck[11] = new cards("3", "Diamond", 3);
-		card_deck[11] = new cards("4", "Spade", 4);
+		card_deck[12] = new cards("4", "Spade", 4);
 		card_deck[13] = new cards("4", "Heart", 4);
 		card_deck[14] = new cards("4", "Clover", 4);
 		card_deck[15] = new cards("4", "Diamond", 4);
@@ -60,27 +60,75 @@ class gamestart {
 		card_deck[50] = new cards("King", "Clover", 13);
 		card_deck[51] = new cards("King", "Diamond", 13);
 		
-		int continueGame = 1;
+		//Initializing objects
 		rounds rd = new rounds();
 		wagerBets wb = new wagerBets();
+		
+		//Keeps the menu loop on while still on the main menu
+		boolean menuLoop = true;
+		boolean tie = false;
+		boolean tieloop = true;
+		
+		//Welcome Menu
+		while(menuLoop == true){
 		System.out.println("Welcome to Casino Card Game War!");
 		System.out.println("A. Start the game! ");
 		System.out.println("B. How to Play? ");
 		System.out.println("C. Exit the game ");
-		System.out.print("Please enter your number of choice: ");
+		System.out.print("Please enter your letter of choice: ");
 		char select = (char) System.in.read();
+		char tieSelect;
+		boolean canWar;
+		
+		//Menu Select
 		
 		switch(select) {
 			case 'a':
 			case 'A':
-			while(continueGame == 1){
+			while(true){
+				//Disables menu looping now that the game has started
+				menuLoop = false;
+				//Goes to function to arrange bet amount
 				wb.make_bet(wb.getCoins(), wb.getCBet());
+				
+				//Goes to function to show drawn cards
 				rd.startround(wb.getCoins(), wb.getCBet(), card_deck);
-				wb.handCompare(rd.getphValue(), rd.getdhValue());
+				
+				//Goes to function to display win, loss, or tie
+				tie = rd.tie_checker(wb.handCompare(rd.getphValue(), rd.getdhValue()));
+				 if (tie == true){
+					while(tieloop == true){
+						canWar = wb.war_Checker(wb.getCoins(), wb.getCBet());
+						if (canWar == false)
+							tieSelect = 's';
+						else 
+							tieSelect = (char) System.in.read();
+						
+
+					switch(tieSelect){
+						case 's':
+						case 'S':
+							tieloop = false;
+							wb.tieSurrender(wb.getCoins(), wb.getCBet());
+							break;
+						case 'w':
+						case 'W':
+							tieloop = false;
+							wb.gotoWar(wb.getCoins(), wb.getCBet());
+							rd.tieround(wb.getCoins(), wb.getCBet(), card_deck);
+							wb.warhandCompare(rd.getphValue(), rd.getdhValue());
+							break;
+						default:
+							System.out.println("Wrong input. Please try again.");
+							break;
+					}
+					}
+				 }
 			}
-				break;
+				
 			case 'b': 
 			case 'B': 
+				//Option to display instructions on how to play
 				System.out.println("Here's how to play!");
 				System.out.println("");
 				System.out.println("The cards are ranked in the same way that cards in poker games are ranked, with aces being the highest cards.");
@@ -93,10 +141,15 @@ class gamestart {
 				break;
 			case 'C':
 			case 'c':
+				//Option to exit the program/ game
 				System.out.println("Closing the game...");
 				System.exit(0);
 			default:
-				System.out.println("Wrong input. Please restart and try again.");
+				//Any other input option results in an error
+				System.out.println("Wrong input. Please try again.");
+				break;
+			
+		}
 		}
 	}
 }
