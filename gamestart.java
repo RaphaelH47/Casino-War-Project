@@ -71,6 +71,7 @@ class gamestart {
 		
 		//Welcome Menu
 		while(menuLoop == true){
+		System.out.println("=========================================");
 		System.out.println("Welcome to Casino Card Game War!");
 		System.out.println("A. Start the game! ");
 		System.out.println("B. How to Play? ");
@@ -131,13 +132,16 @@ class gamestart {
 				//Option to display instructions on how to play
 				System.out.println("Here's how to play!");
 				System.out.println("");
-				System.out.println("The cards are ranked in the same way that cards in poker games are ranked, with aces being the highest cards.");
-				System.out.println("One card each is dealt to a dealer and to a player. If the player's card is higher, he or she wins the wager they bet. However, if the dealer's card is higher, the player loses their bet.");
-				System.out.println("A tie occurs when the dealer and the player each have cards of the same rank. In a tie situation, the player has two options: ");
-				System.out.println("- The player can surrender, in which case the player loses half the bet.");
-				System.out.println("- The player can go to war, in which case the player must double his stake.");
+				System.out.println("The player and dealer is dealt one card each. If the player's card is higher, he or she wins the wager they bet.");
+				System.out.println("However, if the dealer's card is higher, the player loses their bet.");
+				System.out.println("The cards are ranked numerically like this: 2-10= 2-10, Jack = 11, Queen = 12, King = 13, Ace = 14");
+				System.out.println("A tie occurs when the dealer and the player each have cards of the same rank.");
+				System.out.println("In a tie situation, the player has two options: ");
+				System.out.println("  - The player can surrender, in which case the player loses half the bet.");
+				System.out.println("  - The player can go to war, in which case the player must double his stake.");
 				System.out.println("");
 				System.out.println("If the player's card is ranked higher than the dealer's, then the player wins the amount of his original wager only. ");
+				System.out.println("");
 				break;
 			case 'C':
 			case 'c':
