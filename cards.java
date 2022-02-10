@@ -22,6 +22,7 @@ class cards {
 	public int getValue() { return card_value; }
 	
 	//Prints out the cards from a specific array address that is passed to it
+	//and returns the card value
 	public int print_card(){
 		System.out.print("Card name: ");
 		System.out.println(getName());

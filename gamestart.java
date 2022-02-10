@@ -60,14 +60,19 @@ class gamestart {
 		card_deck[50] = new cards("King", "Clover", 13);
 		card_deck[51] = new cards("King", "Diamond", 13);
 		
-		//Initializing objects
+		//Initializing new class objects
 		rounds rd = new rounds();
 		wagerBets wb = new wagerBets();
 		
-		//Keeps the menu loop on while still on the main menu
+		//enables while loops until state is changed
 		boolean menuLoop = true;
 		boolean tie = false;
 		boolean tieloop = true;
+		boolean canWar = true;
+		
+		//char variables for switch case
+		char tieSelect;
+		char select;
 		
 		//Welcome Menu
 		while(menuLoop == true){
@@ -77,19 +82,16 @@ class gamestart {
 		System.out.println("B. How to Play? ");
 		System.out.println("C. Exit the game ");
 		System.out.print("Please enter your letter of choice: ");
-		char select = (char) System.in.read();
-		char tieSelect;
-		boolean canWar;
+		select = (char) System.in.read();
 		
 		//Menu Select
-		
 		switch(select) {
 			case 'a':
 			case 'A':
 			while(true){
 				//Disables menu looping now that the game has started
 				menuLoop = false;
-				//Goes to function to arrange bet amount
+				//Goes to function to arrange bet amounts and coins
 				wb.make_bet(wb.getCoins(), wb.getCBet());
 				
 				//Goes to function to show drawn cards
@@ -105,7 +107,7 @@ class gamestart {
 						else 
 							tieSelect = (char) System.in.read();
 						
-
+					//switch case for Surrender or war
 					switch(tieSelect){
 						case 's':
 						case 'S':

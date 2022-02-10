@@ -19,12 +19,15 @@ class rounds {
 		int card_num = (int)(Math.random() * 52);
 		return card_num;
 	}
+	
+	//checks in case hand compare is a tie
 	public boolean tie_checker(boolean check){
 		if (check == false)
 			return false;
 		else
 			return true;
 	}
+
 		
 	//Prints out the drawn cards for each round
 	public void startround(int c, int b, cards[] deck) {
@@ -38,6 +41,7 @@ class rounds {
 		setphValue(deck[draw_card()].print_card());
 	}
 	
+	//Prints out the drawn cards for a war tie round
 	public void tieround(int c, int b, cards[] deck){
 		System.out.println("=========================================");
 		System.out.println("War Round");

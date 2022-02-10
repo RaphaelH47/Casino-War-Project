@@ -40,6 +40,7 @@ class wagerBets {
 		}
 	}
 	
+	//Compares the card values of player and dealer hand during war tie
 	public void warhandCompare(int p, int d){
 		if(p > d){
 			System.out.println("You Win!");
@@ -96,6 +97,9 @@ class wagerBets {
 			}
 		}
 	}
+	
+	//Checks if coin amount is sufficient to wage war
+	//Auto surrender if not, ask player for a choice if they can
 	public boolean war_Checker(int c, int b){
 		System.out.println("=====================================");
 		int tempCoins = c - b;
@@ -123,12 +127,14 @@ class wagerBets {
 		}
 	}
 	
+	//changes coin and bet amount if player surrenders in a tie
 	public void tieSurrender(int c, int b){
 		int coinReturn = c + (b / 2);
 		setCoins(coinReturn);
 		setCBet(0);
 	}
 	
+	//changes coin and bet amount if player goes to war
 	public void gotoWar(int c, int b){
 		int tempCoins = c - b;
 		setCoins(tempCoins);
